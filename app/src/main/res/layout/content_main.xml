@@ -38,10 +38,10 @@
             android:layout_marginBottom="10dp" />
 
         <AutoCompleteTextView
-            android:text="AutoCompleteTextView"
+            android:text="Coffee Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/autoCompleteTextView"
+            android:id="@+id/coffeeName"
             android:layout_marginBottom="10dp"
             android:textAlignment="center" />
 
@@ -54,27 +54,27 @@
                 android:text="Espresso"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toStartOf="@+id/switch2"
+                android:layout_toStartOf="@+id/coffeeTypeSwitch"
                 android:layout_centerVertical="true"
-                android:id="@+id/textView6"
-                android:textAlignment="center"
-                android:paddingRight="30dp" />
+                android:id="@+id/textEspresso"
+                android:paddingRight="30dp"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium" />
 
             <Switch
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:id="@+id/switch2" />
+                android:id="@+id/coffeeTypeSwitch" />
 
             <TextView
                 android:text="Cappuccino"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/switch2"
+                android:layout_toEndOf="@id/coffeeTypeSwitch"
                 android:layout_centerVertical="true"
-                android:id="@+id/textView7"
-                android:textAlignment="center"
-                android:paddingLeft="30dp" />
+                android:id="@+id/textCappuccino"
+                android:paddingLeft="30dp"
+                android:textAppearance="@android:style/TextAppearance.Material.Medium" />
 
         </RelativeLayout>
 
@@ -88,14 +88,14 @@
                 android:text="Weight"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView8"
+                android:id="@+id/textWeight"
                 android:layout_weight="1" />
 
             <TextView
                 android:text="0.0 g"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/textView9"
+                android:id="@+id/textWeightValue"
                 android:layout_weight="1"
                 android:textAlignment="textEnd" />
         </LinearLayout>
@@ -160,7 +160,7 @@
             android:inputType="textPersonName"
             android:text="Comment"
             android:ems="10"
-            android:id="@+id/editText"
+            android:id="@+id/commentText"
             android:textSize="14sp"
             android:layout_marginBottom="10dp" />
 
@@ -169,7 +169,7 @@
             android:text="Save"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/button"
+            android:id="@+id/saveButton"
             android:layout_marginBottom="10dp"
             android:layout_gravity="center"
             style="@style/Widget.AppCompat.Button.Colored"
