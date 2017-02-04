@@ -38,7 +38,7 @@
             android:layout_marginBottom="10dp" />
 
         <AutoCompleteTextView
-            android:text="Coffee Name"
+            android:hint="Coffee Name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/coffeeName"
@@ -158,7 +158,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
-            android:text="Comment"
+            android:hint="Enter Comment"
             android:ems="10"
             android:id="@+id/commentText"
             android:textSize="14sp"
@@ -182,11 +182,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:id="@+id/historyLayout">
 
-                <ListView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
             </LinearLayout>
         </ScrollView>
 

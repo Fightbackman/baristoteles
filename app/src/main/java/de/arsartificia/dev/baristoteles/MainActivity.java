@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.SeekBar;
 import android.widget.Switch;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity
     TextView textTimeValue;
     TextView textWeightValue;
     RatingBar ratingBar;
+    LinearLayout historyLayout;
     String type = "Espresso";
     SQLiteDatabase readDB;
     SQLiteDatabase writeDB;
@@ -60,6 +62,7 @@ public class MainActivity extends AppCompatActivity
         textTimeValue = (TextView) findViewById(R.id.textTimeValue);
         textWeightValue = (TextView) findViewById(R.id.textWeightValue);
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
+        historyLayout = (LinearLayout) findViewById(R.id.historyLayout);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ldbHelper = new LogDbHelper(getApplicationContext());
@@ -80,18 +83,32 @@ public class MainActivity extends AppCompatActivity
         coffeeName = (AutoCompleteTextView) findViewById(R.id.coffeeName);
         coffeeName.setAdapter(adapter);
 
-        ArrayList<ArrayList<String>> storedLogs = readLog();
-        for (ArrayList<String> log:storedLogs) {
-            Log.d("Log", "");
-            for (String s: log) {
-                Log.d("Part", s);
-            }
-
-        }
-
         setupSeekbars();
         setupSwitch();
-        saveButton();
+        setupSaveButton();
+        fillHistory();
+    }
+
+    public void fillHistory() {
+        ArrayList<ArrayList<String>> storedLogs = readLog();
+        for (ArrayList<String> log:storedLogs) {
+            StringBuilder sb = new StringBuilder();
+            for (int i = 1; i < log.size(); i += 1) {
+                String line = log.get(i);
+                line = line.split("-")[1];
+                if (i == 2) {
+                    line = " Weight: "+String.valueOf(Integer.parseInt(line.trim())/10) +"g";
+                } else if (i == 3) {
+                    line = "\u0009 Time:\u0009"+String.valueOf(Integer.parseInt(line.trim())/10) +"s";
+                } else if (i == 4) {
+                    line = " Rating:"+line;
+                }
+                sb.append(line);
+            }
+            TextView entry = new TextView(getApplicationContext());
+            entry.setText(sb.toString());
+            historyLayout.addView(entry);
+        }
     }
 
     public ArrayList<ArrayList<String>> readLog() {
@@ -100,7 +117,6 @@ public class MainActivity extends AppCompatActivity
         String[] projection = {
                 LogContract.LogEntry._ID,
                 LogContract.LogEntry.COLUMN_NAME_TITLE,
-                LogContract.LogEntry.COLUMN_TIMESTAMP_TITLE,
                 LogContract.LogEntry.COLUMN_WEIGHT_TITLE,
                 LogContract.LogEntry.COLUMN_TIME_TITLE,
                 LogContract.LogEntry.COLUMN_RATING_TITLE,
@@ -132,7 +148,7 @@ public class MainActivity extends AppCompatActivity
         return entries;
     }
 
-    public void saveButton() {
+    public void setupSaveButton() {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
