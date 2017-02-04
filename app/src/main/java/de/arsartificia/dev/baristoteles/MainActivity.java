@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity
     }
 
     public void fillHistory() {
+        historyLayout.removeAllViews();
         ArrayList<ArrayList<String>> storedLogs = readLog();
         for (ArrayList<String> log:storedLogs) {
             StringBuilder sb = new StringBuilder();
@@ -99,7 +100,8 @@ public class MainActivity extends AppCompatActivity
                 if (i == 2) {
                     line = " Weight: "+String.valueOf(Integer.parseInt(line.trim())/10) +"g";
                 } else if (i == 3) {
-                    line = "\u0009 Time:\u0009"+String.valueOf(Integer.parseInt(line.trim())/10) +"s";
+                    sb.append("\u0009");
+                    line = "Time:\u0009"+String.valueOf(Integer.parseInt(line.trim())/10) +"s";
                 } else if (i == 4) {
                     line = " Rating:"+line;
                 }
@@ -170,6 +172,7 @@ public class MainActivity extends AppCompatActivity
                 values.put(LogContract.LogEntry.COLUMN_RATING_TITLE, rating);
                 values.put(LogContract.LogEntry.COLUMN_COMMENT_TITLE, comment);
                 writeDB.insert(LogContract.LogEntry.TABLE_NAME, null, values);
+                fillHistory();
             }
         });
     }
