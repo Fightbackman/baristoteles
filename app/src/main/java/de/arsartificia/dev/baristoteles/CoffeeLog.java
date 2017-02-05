@@ -5,6 +5,7 @@ import android.util.Log;
 import java.util.Locale;
 
 public class CoffeeLog {
+    public String ID;
     public String Name;
     public float Weight;
     public float Time;
@@ -12,7 +13,8 @@ public class CoffeeLog {
     public int Rating;
     public String Comment;
 
-    public CoffeeLog(String name, float weight, float time, String timestamp, int rating, String comment) {
+    public CoffeeLog(String id, String name, float weight, float time, String timestamp, int rating, String comment) {
+        ID = id;
         Name = name;
         Weight = weight;
         Time = time;

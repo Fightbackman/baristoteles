@@ -19,6 +19,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
@@ -57,7 +59,8 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        this.setContentView(R.layout.activity_main);
+
         espressoText = (TextView) findViewById(R.id.textEspresso);
         cappuccinoText = (TextView) findViewById(R.id.textCappuccino);
         commentText = (TextView) findViewById(R.id.commentText);
@@ -68,20 +71,12 @@ public class MainActivity extends AppCompatActivity
         textWeightValue = (TextView) findViewById(R.id.textWeightValue);
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
         historyLayout = (LinearLayout) findViewById(R.id.historyLayout);
+        setTitle(null);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ldbHelper = new LogDbHelper(getApplicationContext());
         readDB = ldbHelper.getReadableDatabase();
         writeDB = ldbHelper.getWritableDatabase();
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_dropdown_item_1line, new String[1]);
@@ -98,7 +93,7 @@ public class MainActivity extends AppCompatActivity
         historyLayout.removeAllViews();
         ArrayList<CoffeeLog> storedLogs = readLog();
         for (CoffeeLog log:storedLogs) {
-            historyLayout.addView(new HistoryEntry(getApplicationContext(), log));
+            historyLayout.addView(new HistoryEntry(getApplicationContext(), log, this));
         }
     }
 
@@ -131,13 +126,14 @@ public class MainActivity extends AppCompatActivity
 
         ArrayList<CoffeeLog> entries = new ArrayList<>();
         while (cursor.moveToNext()) {
+            String id = cursor.getString(0);
             String name = cursor.getString(1);
             float weight = cursor.getFloat(2);
             float time = cursor.getFloat(3);
             String timestamp = cursor.getString(4);
             int rating = cursor.getInt(5);
             String comment = cursor.getString(6);
-            entries.add(new CoffeeLog(name, weight, time, timestamp, rating, comment));
+            entries.add(new CoffeeLog(id, name, weight, time, timestamp, rating, comment));
         }
         cursor.close();
         return entries;
@@ -216,6 +212,14 @@ public class MainActivity extends AppCompatActivity
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {}
         });
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem item= menu.findItem(R.id.action_settings);
+        item.setVisible(false);
+        super.onPrepareOptionsMenu(menu);
+        return true;
     }
 
     @Override
