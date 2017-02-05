@@ -1,9 +1,11 @@
 package de.arsartificia.dev.baristoteles;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,14 +14,17 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.Switch;
 import android.widget.CompoundButton;
@@ -91,29 +96,13 @@ public class MainActivity extends AppCompatActivity
 
     public void fillHistory() {
         historyLayout.removeAllViews();
-        ArrayList<ArrayList<String>> storedLogs = readLog();
-        for (ArrayList<String> log:storedLogs) {
-            StringBuilder sb = new StringBuilder();
-            for (int i = 1; i < log.size(); i += 1) {
-                String line = log.get(i);
-                line = line.split("-")[1];
-                if (i == 2) {
-                    line = " Weight: "+String.valueOf(Integer.parseInt(line.trim())/10) +"g";
-                } else if (i == 3) {
-                    sb.append("\u0009");
-                    line = "Time:\u0009"+String.valueOf(Integer.parseInt(line.trim())/10) +"s";
-                } else if (i == 4) {
-                    line = " Rating:"+line;
-                }
-                sb.append(line);
-            }
-            TextView entry = new TextView(getApplicationContext());
-            entry.setText(sb.toString());
-            historyLayout.addView(entry);
+        ArrayList<CoffeeLog> storedLogs = readLog();
+        for (CoffeeLog log:storedLogs) {
+            historyLayout.addView(new HistoryEntry(getApplicationContext(), log));
         }
     }
 
-    public ArrayList<ArrayList<String>> readLog() {
+    public ArrayList<CoffeeLog> readLog() {
         // Define a projection that specifies which columns from the database
         // you will actually use after this query.
         String[] projection = {
@@ -121,6 +110,7 @@ public class MainActivity extends AppCompatActivity
                 LogContract.LogEntry.COLUMN_NAME_TITLE,
                 LogContract.LogEntry.COLUMN_WEIGHT_TITLE,
                 LogContract.LogEntry.COLUMN_TIME_TITLE,
+                LogContract.LogEntry.COLUMN_TIMESTAMP_TITLE,
                 LogContract.LogEntry.COLUMN_RATING_TITLE,
                 LogContract.LogEntry.COLUMN_COMMENT_TITLE
         };
@@ -139,14 +129,17 @@ public class MainActivity extends AppCompatActivity
                 sortOrder                                            // The sort order
         );
 
-        ArrayList<ArrayList<String>> entries = new ArrayList<>();
+        ArrayList<CoffeeLog> entries = new ArrayList<>();
         while (cursor.moveToNext()) {
-            ArrayList<String> entry = new ArrayList<>();
-            for (int i = 0; i < cursor.getColumnCount(); i++) {
-                entry.add(cursor.getColumnName(i)+" - "+cursor.getString(i));
-            }
-            entries.add(entry);
+            String name = cursor.getString(1);
+            float weight = cursor.getFloat(2);
+            float time = cursor.getFloat(3);
+            String timestamp = cursor.getString(4);
+            int rating = cursor.getInt(5);
+            String comment = cursor.getString(6);
+            entries.add(new CoffeeLog(name, weight, time, timestamp, rating, comment));
         }
+        cursor.close();
         return entries;
     }
 
@@ -156,9 +149,7 @@ public class MainActivity extends AppCompatActivity
             public void onClick(View view) {
                 String name = coffeeName.getText().toString();
                 Float weight = Float.valueOf(Util.removeLastChar(textWeightValue.getText().toString()));
-                weight*=10;
                 Float time = Float.valueOf(Util.removeLastChar(textTimeValue.getText().toString()));
-                time*=10;
                 int rating = Math.round(ratingBar.getRating());
                 String comment = commentText.getText().toString();
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss", Locale.GERMAN);
@@ -166,8 +157,8 @@ public class MainActivity extends AppCompatActivity
                 Log.d("save", String.format(Locale.ENGLISH, "%s %s %s %d %s %s", name, weight, time, rating, comment, timestamp));
                 ContentValues values = new ContentValues();
                 values.put(LogContract.LogEntry.COLUMN_NAME_TITLE, name);
-                values.put(LogContract.LogEntry.COLUMN_WEIGHT_TITLE, Math.round(weight));
-                values.put(LogContract.LogEntry.COLUMN_TIME_TITLE, Math.round(time));
+                values.put(LogContract.LogEntry.COLUMN_WEIGHT_TITLE, weight);
+                values.put(LogContract.LogEntry.COLUMN_TIME_TITLE, time);
                 values.put(LogContract.LogEntry.COLUMN_TIMESTAMP_TITLE, timestamp);
                 values.put(LogContract.LogEntry.COLUMN_RATING_TITLE, rating);
                 values.put(LogContract.LogEntry.COLUMN_COMMENT_TITLE, comment);
