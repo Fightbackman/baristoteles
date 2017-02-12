@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity
         textWeightValue = (TextView) findViewById(R.id.textWeightValue);
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
         historyLayout = (LinearLayout) findViewById(R.id.historyLayout);
-        setTitle(null);
+        setTitle("Welcome to Baristoteles !");
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ldbHelper = new LogDbHelper(getApplicationContext());

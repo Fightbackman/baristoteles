@@ -5,189 +5,180 @@
     android:id="@+id/content_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="de.arsartificia.dev.baristoteles.MainActivity"
     tools:showIn="@layout/app_bar_main">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="5dp"
-        android:focusable="true"
-        android:focusableInTouchMode="true">
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Welcome to Baristoteles !"
-            android:textAlignment="center"
-            android:layout_alignParentEnd="true"
-            android:textAppearance="@android:style/TextAppearance.Material.Large"
-            android:layout_marginBottom="10dp" />
-
-        <TextView
-            android:text="To log a coffee fill out the details below :"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView3"
-            android:layout_marginBottom="10dp" />
-
-        <AutoCompleteTextView
-            android:hint="Coffee Name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/coffeeName"
-            android:layout_marginBottom="10dp"
-            android:textAlignment="center" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp" >
-
-            <TextView
-                android:text="Espresso"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toStartOf="@+id/coffeeTypeSwitch"
-                android:layout_centerVertical="true"
-                android:id="@+id/textEspresso"
-                android:paddingRight="30dp"
-                android:textAppearance="@android:style/TextAppearance.Material.Medium" />
-
-            <Switch
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:id="@+id/coffeeTypeSwitch" />
-
-            <TextView
-                android:text="Cappuccino"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_toEndOf="@id/coffeeTypeSwitch"
-                android:layout_centerVertical="true"
-                android:id="@+id/textCappuccino"
-                android:paddingLeft="30dp"
-                android:textAppearance="@android:style/TextAppearance.Material.Medium" />
-
-        </RelativeLayout>
-
+        android:layout_height="match_parent">
         <LinearLayout
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
+            android:layout_height="match_parent"
+            android:padding="5dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
 
             <TextView
-                android:text="Weight"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textWeight"
-                android:layout_weight="1" />
-
-            <TextView
-                android:text="0.0 g"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textWeightValue"
-                android:layout_weight="1"
-                android:textAlignment="textEnd" />
-        </LinearLayout>
-
-        <SeekBar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/seekBarWeight"
-            android:max="300"
-            android:progress="1" />
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
-
-            <TextView
-                android:text="Time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textTime"
-                android:layout_weight="1" />
-
-            <TextView
-                android:text="0 s"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textTimeValue"
-                android:layout_weight="1"
-                android:textAlignment="textEnd" />
-        </LinearLayout>
-
-        <SeekBar
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/seekBarTime"
-            android:max="600"
-            android:progress="1"
-            android:layout_marginBottom="10dp"/>
-
-        <RatingBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/ratingBar"
-            android:layout_gravity="center"
-            android:numStars="5"
-            android:rating="3"
-            android:stepSize="1" />
-
-        <TextView
-            android:text="1: very poor 2: poor 3: average 4: good 5: very good"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/textView10"
-            android:textAlignment="center"
-            android:layout_marginBottom="10dp"/>
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:hint="Enter Comment"
-            android:ems="10"
-            android:id="@+id/commentText"
-            android:textSize="14sp"
-            android:layout_marginBottom="10dp" />
-
-
-        <Button
-            android:text="Save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/saveButton"
-            android:layout_marginBottom="10dp"
-            android:layout_gravity="center"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:elevation="24dp" />
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <LinearLayout
+                android:text="To log a coffee fill out the details below :"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:id="@+id/historyLayout">
+                android:id="@+id/textView3"
+                android:layout_marginBottom="10dp" />
 
+            <AutoCompleteTextView
+                android:hint="Coffee Name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/coffeeName"
+                android:layout_marginBottom="10dp"
+                android:textAlignment="center" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp" >
+
+                <TextView
+                    android:text="Pure"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toStartOf="@+id/coffeeTypeSwitch"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/textEspresso"
+                    android:paddingRight="30dp"
+                    android:textAppearance="@android:style/TextAppearance.Material.Medium" />
+
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:id="@+id/coffeeTypeSwitch" />
+
+                <TextView
+                    android:text="Other"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@id/coffeeTypeSwitch"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/textCappuccino"
+                    android:paddingLeft="30dp"
+                    android:textAppearance="@android:style/TextAppearance.Material.Medium" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:text="Weight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textWeight"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:text="0.0 g"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textWeightValue"
+                    android:layout_weight="1"
+                    android:textAlignment="textEnd" />
             </LinearLayout>
-        </ScrollView>
 
-    </LinearLayout>
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/seekBarWeight"
+                android:max="300"
+                android:progress="1" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:text="Time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textTime"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:text="0 s"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textTimeValue"
+                    android:layout_weight="1"
+                    android:textAlignment="textEnd" />
+            </LinearLayout>
+
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/seekBarTime"
+                android:max="600"
+                android:progress="1"
+                android:layout_marginBottom="10dp"/>
+
+            <RatingBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/ratingBar"
+                android:layout_gravity="center"
+                android:numStars="5"
+                android:rating="3"
+                android:stepSize="1" />
+
+            <TextView
+                android:text="1: very poor 2: poor 3: average 4: good 5: very good"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView10"
+                android:textAlignment="center"
+                android:layout_marginBottom="10dp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:hint="Enter Comment"
+                android:ems="10"
+                android:id="@+id/commentText"
+                android:textSize="14sp"
+                android:layout_marginBottom="10dp" />
+
+
+            <Button
+                android:text="Save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/saveButton"
+                android:layout_marginBottom="10dp"
+                android:layout_gravity="center"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:elevation="24dp" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:id="@+id/historyLayout">
+
+                </LinearLayout>
+            </ScrollView>
+
+        </LinearLayout>
+    </ScrollView>
 
 </RelativeLayout>

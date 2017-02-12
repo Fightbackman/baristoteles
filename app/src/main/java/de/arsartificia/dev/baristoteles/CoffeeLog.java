@@ -24,7 +24,7 @@ public class CoffeeLog {
     }
 
     public String getDetails() {
-        return String.format(Locale.ENGLISH, "Weight : %.1f g Time : %.1f s", Weight, Time);
+        return String.format(Locale.ENGLISH, "%.1f g %.1f s", Weight, Time);
     }
 
     public String getRating() {

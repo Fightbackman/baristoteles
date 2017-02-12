@@ -6,10 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridLayout;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-public class HistoryEntry extends RelativeLayout {
+public class HistoryEntry extends LinearLayout {
     private CoffeeLog coffeeLog;
     private MainActivity mainActivity;
 
