@@ -34,7 +34,7 @@ public class HistoryEntry extends LinearLayout {
                 String selection = LogContract.LogEntry._ID + " LIKE ?";
                 String[] selectionArgs = { coffeeLog.ID };
                 mainActivity.writeDB.delete(LogContract.LogEntry.TABLE_NAME, selection, selectionArgs);
-                mainActivity.fillHistory();
+                mainActivity.fillHistory(true);
             }
         });
     }

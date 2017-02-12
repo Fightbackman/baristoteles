@@ -37,7 +37,7 @@
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginBottom="10dp" >
 
                 <TextView
@@ -165,14 +165,6 @@
                 android:numStars="5"
                 android:rating="3"
                 android:stepSize="1" />
-
-            <TextView
-                android:text="1: very poor 2: poor 3: average 4: good 5: very good"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView10"
-                android:textAlignment="center"
-                android:layout_marginBottom="10dp"/>
 
             <EditText
                 android:layout_width="match_parent"

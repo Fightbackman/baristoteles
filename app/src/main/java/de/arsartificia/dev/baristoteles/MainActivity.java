@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -32,6 +33,7 @@ import android.widget.Switch;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity
     TextView espressoText;
     TextView cappuccinoText;
     TextView commentText;
+    Switch coffeeTypeSwitch;
     Button saveButton;
     SeekBar seekBarTime;
     SeekBar seekBarWeight;
@@ -57,6 +60,7 @@ public class MainActivity extends AppCompatActivity
     String type = "Espresso";
     SQLiteDatabase readDB;
     SQLiteDatabase writeDB;
+    ArrayList<CoffeeLog> storedLogs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +70,7 @@ public class MainActivity extends AppCompatActivity
         espressoText = (TextView) findViewById(R.id.textEspresso);
         cappuccinoText = (TextView) findViewById(R.id.textCappuccino);
         commentText = (TextView) findViewById(R.id.commentText);
+        coffeeTypeSwitch = (Switch) findViewById(R.id.coffeeTypeSwitch);
         saveButton = (Button) findViewById(R.id.saveButton);
         seekBarTime = (SeekBar) findViewById(R.id.seekBarTime);
         seekBarWeight = (SeekBar) findViewById(R.id.seekBarWeight);
@@ -90,15 +95,37 @@ public class MainActivity extends AppCompatActivity
         setupSeekbars();
         setupSwitch();
         setupSaveButton();
-        fillHistory();
+        fillHistory(true);
+        if (storedLogs.size()>=1) {
+            setToValues(storedLogs.get(0));
+        }
     }
 
-    public void fillHistory() {
+    public void fillHistory(boolean update) {
         historyLayout.removeAllViews();
-        ArrayList<CoffeeLog> storedLogs = readLog();
+
+        if (update) {
+            storedLogs = readLog();
+        }
+
         for (CoffeeLog log:storedLogs) {
             historyLayout.addView(new HistoryEntry(getApplicationContext(), log, this));
         }
+    }
+
+    public void setToValues(final CoffeeLog coffeeLog) {
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                coffeeName.setText(coffeeLog.Name);
+                seekBarWeight.setProgress(Math.round(coffeeLog.Weight*10), true);
+                seekBarTime.setProgress(Math.round(coffeeLog.Time*10), true);
+                seekBarGrind.setProgress(coffeeLog.Grind, true);
+                ratingBar.setRating(coffeeLog.Rating);
+                //commentText.setText(coffeeLog.Comment);
+            }
+        }, 500);
     }
 
     public ArrayList<CoffeeLog> readLog() {
@@ -107,6 +134,7 @@ public class MainActivity extends AppCompatActivity
         String[] projection = {
                 LogContract.LogEntry._ID,
                 LogContract.LogEntry.COLUMN_NAME_TITLE,
+                LogContract.LogEntry.COLUMN_TYPE_TITLE,
                 LogContract.LogEntry.COLUMN_WEIGHT_TITLE,
                 LogContract.LogEntry.COLUMN_TIME_TITLE,
                 LogContract.LogEntry.COLUMN_GRIND_TITLE,
@@ -133,13 +161,14 @@ public class MainActivity extends AppCompatActivity
         while (cursor.moveToNext()) {
             String id = cursor.getString(0);
             String name = cursor.getString(1);
-            float weight = cursor.getFloat(2);
-            float time = cursor.getFloat(3);
-            int grind = cursor.getInt(4);
-            String timestamp = cursor.getString(5);
-            int rating = cursor.getInt(6);
-            String comment = cursor.getString(7);
-            entries.add(new CoffeeLog(id, name, weight, time, grind, timestamp, rating, comment));
+            String type = cursor.getString(2);
+            float weight = cursor.getFloat(3);
+            float time = cursor.getFloat(4);
+            int grind = cursor.getInt(5);
+            String timestamp = cursor.getString(6);
+            int rating = cursor.getInt(7);
+            String comment = cursor.getString(8);
+            entries.add(new CoffeeLog(id, name, type, weight, time, grind, timestamp, rating, comment));
         }
         cursor.close();
         return entries;
@@ -167,13 +196,12 @@ public class MainActivity extends AppCompatActivity
                 values.put(LogContract.LogEntry.COLUMN_RATING_TITLE, rating);
                 values.put(LogContract.LogEntry.COLUMN_COMMENT_TITLE, comment);
                 writeDB.insert(LogContract.LogEntry.TABLE_NAME, null, values);
-                fillHistory();
+                fillHistory(true);
             }
         });
     }
 
     public void setupSwitch() {
-        Switch coffeeTypeSwitch = (Switch) findViewById(R.id.coffeeTypeSwitch);
         coffeeTypeSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean on) {
