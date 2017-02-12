@@ -48,8 +48,10 @@ public class MainActivity extends AppCompatActivity
     Button saveButton;
     SeekBar seekBarTime;
     SeekBar seekBarWeight;
+    SeekBar seekBarGrind;
     TextView textTimeValue;
     TextView textWeightValue;
+    TextView textGrindValue;
     RatingBar ratingBar;
     LinearLayout historyLayout;
     String type = "Espresso";
@@ -67,8 +69,10 @@ public class MainActivity extends AppCompatActivity
         saveButton = (Button) findViewById(R.id.saveButton);
         seekBarTime = (SeekBar) findViewById(R.id.seekBarTime);
         seekBarWeight = (SeekBar) findViewById(R.id.seekBarWeight);
+        seekBarGrind = (SeekBar) findViewById(R.id.seekBarGrind);
         textTimeValue = (TextView) findViewById(R.id.textTimeValue);
         textWeightValue = (TextView) findViewById(R.id.textWeightValue);
+        textGrindValue = (TextView) findViewById(R.id.textGrindValue);
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
         historyLayout = (LinearLayout) findViewById(R.id.historyLayout);
         setTitle("Welcome to Baristoteles !");
@@ -105,6 +109,7 @@ public class MainActivity extends AppCompatActivity
                 LogContract.LogEntry.COLUMN_NAME_TITLE,
                 LogContract.LogEntry.COLUMN_WEIGHT_TITLE,
                 LogContract.LogEntry.COLUMN_TIME_TITLE,
+                LogContract.LogEntry.COLUMN_GRIND_TITLE,
                 LogContract.LogEntry.COLUMN_TIMESTAMP_TITLE,
                 LogContract.LogEntry.COLUMN_RATING_TITLE,
                 LogContract.LogEntry.COLUMN_COMMENT_TITLE
@@ -130,10 +135,11 @@ public class MainActivity extends AppCompatActivity
             String name = cursor.getString(1);
             float weight = cursor.getFloat(2);
             float time = cursor.getFloat(3);
-            String timestamp = cursor.getString(4);
-            int rating = cursor.getInt(5);
-            String comment = cursor.getString(6);
-            entries.add(new CoffeeLog(id, name, weight, time, timestamp, rating, comment));
+            int grind = cursor.getInt(4);
+            String timestamp = cursor.getString(5);
+            int rating = cursor.getInt(6);
+            String comment = cursor.getString(7);
+            entries.add(new CoffeeLog(id, name, weight, time, grind, timestamp, rating, comment));
         }
         cursor.close();
         return entries;
@@ -146,6 +152,7 @@ public class MainActivity extends AppCompatActivity
                 String name = coffeeName.getText().toString();
                 Float weight = Float.valueOf(Util.removeLastChar(textWeightValue.getText().toString()));
                 Float time = Float.valueOf(Util.removeLastChar(textTimeValue.getText().toString()));
+                int grind = Integer.valueOf(textGrindValue.getText().toString());
                 int rating = Math.round(ratingBar.getRating());
                 String comment = commentText.getText().toString();
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM-yyyy-hh-mm-ss", Locale.GERMAN);
@@ -155,6 +162,7 @@ public class MainActivity extends AppCompatActivity
                 values.put(LogContract.LogEntry.COLUMN_NAME_TITLE, name);
                 values.put(LogContract.LogEntry.COLUMN_WEIGHT_TITLE, weight);
                 values.put(LogContract.LogEntry.COLUMN_TIME_TITLE, time);
+                values.put(LogContract.LogEntry.COLUMN_GRIND_TITLE, grind);
                 values.put(LogContract.LogEntry.COLUMN_TIMESTAMP_TITLE, timestamp);
                 values.put(LogContract.LogEntry.COLUMN_RATING_TITLE, rating);
                 values.put(LogContract.LogEntry.COLUMN_COMMENT_TITLE, comment);
@@ -203,7 +211,20 @@ public class MainActivity extends AppCompatActivity
         seekBarWeight.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
-                textWeightValue.setText(String.format(Locale.ENGLISH, "%d g", i/10));
+                textWeightValue.setText(String.format(Locale.ENGLISH, "%.1f g", i/10.));
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
+
+        seekBarGrind.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                textGrindValue.setText(String.format(Locale.ENGLISH, "%d", i));
             }
 
             @Override

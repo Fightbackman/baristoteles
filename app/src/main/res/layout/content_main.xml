@@ -127,6 +127,36 @@
                 android:progress="1"
                 android:layout_marginBottom="10dp"/>
 
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp">
+
+                <TextView
+                    android:text="Grind"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textGrind"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:text="0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textGrindValue"
+                    android:layout_weight="1"
+                    android:textAlignment="textEnd" />
+            </LinearLayout>
+
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/seekBarGrind"
+                android:max="100"
+                android:progress="1"
+                android:layout_marginBottom="10dp"/>
+
             <RatingBar
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

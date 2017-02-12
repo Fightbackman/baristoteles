@@ -9,22 +9,24 @@ public class CoffeeLog {
     public String Name;
     public float Weight;
     public float Time;
+    public int Grind;
     public String Timestamp;
     public int Rating;
     public String Comment;
 
-    public CoffeeLog(String id, String name, float weight, float time, String timestamp, int rating, String comment) {
+    public CoffeeLog(String id, String name, float weight, float time, int grind, String timestamp, int rating, String comment) {
         ID = id;
         Name = name;
         Weight = weight;
         Time = time;
+        Grind = grind;
         Timestamp = timestamp;
         Rating = rating;
         Comment = comment;
     }
 
     public String getDetails() {
-        return String.format(Locale.ENGLISH, "%.1f g %.1f s", Weight, Time);
+        return String.format(Locale.ENGLISH, "%.1f g %d s %d", Weight, Math.round(Time), Grind);
     }
 
     public String getRating() {
@@ -41,6 +43,6 @@ public class CoffeeLog {
 
     @Override
     public String toString() {
-        return String.format(Locale.ENGLISH, "%s %.1f g %.1f s %s Rating : %d Comment : %s", Name, Weight, Time, Timestamp, Rating, Comment);
+        return String.format(Locale.ENGLISH, "%s %.1f g %d s Grind: %d %s Rating : %d Comment : %s", Name, Weight, Math.round(Time), Grind, Timestamp, Rating, Comment);
     }
 }
