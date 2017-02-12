@@ -87,15 +87,16 @@ public class MainActivity extends AppCompatActivity
         readDB = ldbHelper.getReadableDatabase();
         writeDB = ldbHelper.getWritableDatabase();
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_dropdown_item_1line, new String[1]);
-        coffeeName = (AutoCompleteTextView) findViewById(R.id.coffeeName);
-        coffeeName.setAdapter(adapter);
+        fillHistory(true);
+
+        // Disable drawer menu for now
+        DrawerLayout mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
 
         setupSeekbars();
         setupSwitch();
         setupSaveButton();
-        fillHistory(true);
+
         if (storedLogs.size()>=1) {
             setToValues(storedLogs.get(0));
         }
@@ -105,12 +106,20 @@ public class MainActivity extends AppCompatActivity
         historyLayout.removeAllViews();
 
         if (update) {
-            storedLogs = readLog();
+            update();
         }
 
         for (CoffeeLog log:storedLogs) {
             historyLayout.addView(new HistoryEntry(getApplicationContext(), log, this));
         }
+    }
+
+    public void update() {
+        storedLogs = readLog();
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_dropdown_item_1line, getCoffeeNames());
+        coffeeName = (AutoCompleteTextView) findViewById(R.id.coffeeName);
+        coffeeName.setAdapter(adapter);
     }
 
     public void setToValues(final CoffeeLog coffeeLog) {
@@ -126,6 +135,14 @@ public class MainActivity extends AppCompatActivity
                 //commentText.setText(coffeeLog.Comment);
             }
         }, 500);
+    }
+
+    public ArrayList<String> getCoffeeNames() {
+        ArrayList<String> coffeeNames = new ArrayList<String>();
+        for (CoffeeLog log : storedLogs) {
+            coffeeNames.add(log.Name);
+        }
+        return coffeeNames;
     }
 
     public ArrayList<CoffeeLog> readLog() {
