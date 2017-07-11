@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:id="@+id/add_dialog"
+    android:id="@+id/weight_dialog"
     android:layout_height="match_parent"
     android:background="@color/colorAccent">
 
@@ -180,6 +180,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/Base.TextAppearance.AppCompat.Widget.Button.Colored"
+        android:id="@+id/buttonNext"
         android:background="@color/colorPrimary"
         android:textAlignment="center"
         android:text="Next"

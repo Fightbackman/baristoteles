@@ -1,25 +1,28 @@
 package com.arsartificia.dev.baristoteles
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
+import android.animation.*
 import android.app.Dialog
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-
-import kotlinx.android.synthetic.main.activity_main.*
-import android.graphics.drawable.ColorDrawable
-import android.content.DialogInterface
-import android.view.*
-import android.widget.ImageView
-import kotlinx.android.synthetic.main.add_dialog.view.*
 import android.content.Context
-import android.view.inputmethod.InputMethodManager
-import android.R.attr.x
+import android.content.DialogInterface
 import android.graphics.Point
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.GradientDrawable
+import android.os.Bundle
+import android.os.Handler
+import android.support.design.widget.Snackbar
+import android.support.v7.app.AppCompatActivity
+import android.view.*
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
+import android.widget.ImageView
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.weight_dialog.*
+import kotlinx.android.synthetic.main.weight_dialog.view.*
 
 
 class MainActivity : AppCompatActivity() {
+
+    var weight: Float = 0f
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +30,9 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener { view ->
-            createNewEntry(view)
+            val weightDialogView = View.inflate(this, R.layout.weight_dialog, null)
+            val imageView : ImageView = weightDialogView.findViewById(R.id.closeDialogImg)
+            createDialog(view, weightDialogView, imageView, MainActivity::stepWeight)
         }
     }
 
@@ -51,21 +56,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun createNewEntry(view: View) {
-        val dialogView = View.inflate(this, R.layout.add_dialog, null)
-
+    fun createDialog(view: View, dialogView: View, imageView: ImageView, stepFunc: (MainActivity, View, Boolean, Dialog) -> Unit, lastDialog: Dialog? = null) {
         val dialog = Dialog(this, R.style.AddDialogStyle)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(dialogView)
 
-        val imageView : ImageView = dialog.findViewById(R.id.closeDialogImg)
-        imageView.setOnClickListener(View.OnClickListener { revealShow(dialogView, false, dialog) })
+        imageView.setOnClickListener({ stepFunc(this, dialogView, false, dialog) })
 
-        dialog.setOnShowListener(DialogInterface.OnShowListener { revealShow(dialogView, true, dialog) })
+        dialog.setOnShowListener({ stepFunc(this, dialogView, true, dialog) })
 
         dialog.setOnKeyListener(DialogInterface.OnKeyListener { _, i, _ ->
             if (i == KeyEvent.KEYCODE_BACK) {
-                revealShow(dialogView, false, dialog)
+                stepFunc(this, dialogView, false, dialog)
                 return@OnKeyListener true
             }
 
@@ -76,8 +78,13 @@ class MainActivity : AppCompatActivity() {
         dialog.window.setBackgroundDrawable(ColorDrawable(android.graphics.Color.TRANSPARENT))
 
         dialog.show()
-        //Snackbar.make(view, "Added new Coffee !", Snackbar.LENGTH_LONG)
-        //        .setAction("Action", null).show()
+
+        if (lastDialog != null) {
+            val handler = Handler()
+            handler.postDelayed({
+                lastDialog.dismiss()
+            }, 400)
+        }
     }
 
     private fun changeEditText(dialogView: View, exec: (String) -> String) {
@@ -96,32 +103,32 @@ class MainActivity : AppCompatActivity() {
         edit_txt.setText(txt)
     }
 
-    private fun revealShow(mainView: View, b: Boolean, dialog: Dialog) {
-        val dialogView : View = mainView.findViewById(R.id.add_dialog)
+    fun stepWeight(mainView: View, b: Boolean, dialog: Dialog) {
+        val dialogWeight : View = mainView.findViewById(R.id.weight_dialog)
         //Hide Keyboard
-        dialogView.postDelayed(Runnable {
+        dialogWeight.postDelayed({
             val keyboard = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            keyboard.hideSoftInputFromWindow(dialogView.windowToken, 0)
+            keyboard.hideSoftInputFromWindow(dialogWeight.windowToken, 0)
         }, 50)
 
         //Set Proper fontsize
         val size = Point()
         windowManager.defaultDisplay.getSize(size)
         val percent = .05f
-        dialogView.touchables.filterIsInstance<Button>().forEach { it: Button -> it.textSize = percent * size.x }
+        dialogWeight.touchables.filterIsInstance<Button>().forEach { it: Button -> it.textSize = percent * size.x }
 
-        dialogView.buttonNine.setOnClickListener { _ -> changeEditText(dialogView, { it.plus("9") }) }
-        dialogView.buttonEight.setOnClickListener { _ -> changeEditText(dialogView, { it.plus("8") }) }
-        dialogView.buttonSeven.setOnClickListener { _ -> changeEditText(dialogView, { it.plus("7") }) }
-        dialogView.buttonSix.setOnClickListener { _ -> changeEditText(dialogView, { it.plus("6") }) }
-        dialogView.buttonFive.setOnClickListener { _ -> changeEditText(dialogView, { it.plus("5") }) }
-        dialogView.buttonFour.setOnClickListener { _ -> changeEditText(dialogView, { it.plus("4") }) }
-        dialogView.buttonThree.setOnClickListener { _ -> changeEditText(dialogView, { it.plus("3") }) }
-        dialogView.buttonTwo.setOnClickListener { _ -> changeEditText(dialogView, { it.plus("2") }) }
-        dialogView.buttonOne.setOnClickListener { _ -> changeEditText(dialogView, { it.plus("1") }) }
-        dialogView.buttonZero.setOnClickListener { _ -> changeEditText(dialogView, { it.plus("0") }) }
-        dialogView.buttonDelete.setOnClickListener { _ -> changeEditText(dialogView, { it.dropLast(1) }) }
-        dialogView.buttonDot.setOnClickListener { _ -> changeEditText(dialogView, { txt ->
+        dialogWeight.buttonNine.setOnClickListener { _ -> changeEditText(dialogWeight, { it.plus("9") }) }
+        dialogWeight.buttonEight.setOnClickListener { _ -> changeEditText(dialogWeight, { it.plus("8") }) }
+        dialogWeight.buttonSeven.setOnClickListener { _ -> changeEditText(dialogWeight, { it.plus("7") }) }
+        dialogWeight.buttonSix.setOnClickListener { _ -> changeEditText(dialogWeight, { it.plus("6") }) }
+        dialogWeight.buttonFive.setOnClickListener { _ -> changeEditText(dialogWeight, { it.plus("5") }) }
+        dialogWeight.buttonFour.setOnClickListener { _ -> changeEditText(dialogWeight, { it.plus("4") }) }
+        dialogWeight.buttonThree.setOnClickListener { _ -> changeEditText(dialogWeight, { it.plus("3") }) }
+        dialogWeight.buttonTwo.setOnClickListener { _ -> changeEditText(dialogWeight, { it.plus("2") }) }
+        dialogWeight.buttonOne.setOnClickListener { _ -> changeEditText(dialogWeight, { it.plus("1") }) }
+        dialogWeight.buttonZero.setOnClickListener { _ -> changeEditText(dialogWeight, { it.plus("0") }) }
+        dialogWeight.buttonDelete.setOnClickListener { _ -> changeEditText(dialogWeight, { it.dropLast(1) }) }
+        dialogWeight.buttonDot.setOnClickListener { _ -> changeEditText(dialogWeight, { txt ->
             if (!txt.contains('.')) {
                 txt.plus(".")
             }
@@ -129,21 +136,39 @@ class MainActivity : AppCompatActivity() {
                 txt
             }
         }) }
+        dialogWeight.buttonNext.setOnClickListener { view ->
+            try {
+                weight = dialogWeight.editText.text.toString().dropLast(2).toFloat()
+                val timeDialogView = View.inflate(this, R.layout.time_dialog, null)
+                val imageView : ImageView = timeDialogView.findViewById(R.id.closeDialogImg)
+                createDialog(view, timeDialogView, imageView, MainActivity::stepTime, dialog)
+            } catch (error: NumberFormatException) {
+                Snackbar.make(dialogWeight, "Please enter a proper number", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show()
+            } catch (error: Exception) {
+                Snackbar.make(dialogWeight, error.toString(), Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show()
+            }
+        }
 
+        revealAnimation(mainView, b, dialog, fab)
+    }
+
+    private fun revealAnimation(mainView: View, b: Boolean, dialog: Dialog, center: View) {
         val w = mainView.width
         val h = mainView.height
 
         val endRadius = Math.hypot(w.toDouble(), h.toDouble()).toFloat()
 
-        val cx: Int = (fab.x + fab.width / 2).toInt()
-        val cy: Int = fab.y.toInt() + fab.height + 56
+        val cx: Int = (center.x + center.width / 2).toInt()
+        val cy: Int = center.y.toInt() + center.height + 56
 
 
         if (b) {
             val revealAnimator = ViewAnimationUtils.createCircularReveal(mainView, cx, cy, 0.0f, endRadius)
 
             mainView.visibility = View.VISIBLE
-            revealAnimator.duration = 700
+            revealAnimator.duration = 400
             revealAnimator.start()
 
         } else {
@@ -154,12 +179,22 @@ class MainActivity : AppCompatActivity() {
                 override fun onAnimationEnd(animation: Animator) {
                     super.onAnimationEnd(animation)
                     dialog.dismiss()
-                    mainView.setVisibility(View.INVISIBLE)
+                    mainView.visibility =  View.INVISIBLE
                 }
             })
-            anim.duration = 700
+            anim.duration = 400
             anim.start()
         }
+
+    }
+
+    fun stepTime(mainView: View, b: Boolean, dialog: Dialog) {
+        val dialogTime : View = mainView.findViewById(R.id.time_dialog)
+        when (b) {
+            true -> revealAnimation(mainView, b, dialog, dialogTime)
+            false -> revealAnimation(mainView, b, dialog, fab)
+        }
+
 
     }
 }
