@@ -39,7 +39,8 @@
         android:gravity="center"
         android:lines="1"
         android:maxLines="1"
-        android:textSize="70sp" />
+        android:textSize="@dimen/buttonFontSize"
+        android:textColor="@color/colorPrimaryDark"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -52,7 +53,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:text="7"
-            android:textSize="70sp" />
+            android:textSize="@dimen/buttonFontSize" />
 
         <Button
             android:id="@+id/buttonEight"
@@ -61,7 +62,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:text="8"
-            android:textSize="70sp" />
+            android:textSize="@dimen/buttonFontSize" />
 
         <Button
             android:id="@+id/buttonNine"
@@ -70,7 +71,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:text="9"
-            android:textSize="70sp" />
+            android:textSize="@dimen/buttonFontSize" />
     </LinearLayout>
 
     <LinearLayout
@@ -85,7 +86,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:text="4"
-            android:textSize="70sp" />
+            android:textSize="@dimen/buttonFontSize" />
 
         <Button
             android:id="@+id/buttonFive"
@@ -94,7 +95,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:text="5"
-            android:textSize="70sp" />
+            android:textSize="@dimen/buttonFontSize" />
 
         <Button
             android:id="@+id/buttonSix"
@@ -103,7 +104,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:text="6"
-            android:textSize="70sp" />
+            android:textSize="@dimen/buttonFontSize" />
 
     </LinearLayout>
 
@@ -119,7 +120,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:text="1"
-            android:textSize="70sp" />
+            android:textSize="@dimen/buttonFontSize" />
 
         <Button
             android:id="@+id/buttonTwo"
@@ -128,7 +129,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:text="2"
-            android:textSize="70sp" />
+            android:textSize="@dimen/buttonFontSize" />
 
         <Button
             android:id="@+id/buttonThree"
@@ -137,7 +138,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:text="3"
-            android:textSize="70sp" />
+            android:textSize="@dimen/buttonFontSize" />
 
     </LinearLayout>
 
@@ -153,7 +154,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:text="."
-            android:textSize="70sp" />
+            android:textSize="@dimen/buttonFontSize" />
 
         <Button
             android:id="@+id/buttonZero"
@@ -162,7 +163,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:text="0"
-            android:textSize="70sp" />
+            android:textSize="@dimen/buttonFontSize" />
 
         <Button
             android:id="@+id/buttonDelete"
@@ -171,8 +172,19 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:text="\u232b"
-            android:textSize="70sp" />
+            android:textSize="@dimen/buttonFontSize" />
 
     </LinearLayout>
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Base.TextAppearance.AppCompat.Widget.Button.Colored"
+        android:background="@color/colorPrimary"
+        android:textAlignment="center"
+        android:text="Next"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="35sp"
+        />
 
 </LinearLayout>

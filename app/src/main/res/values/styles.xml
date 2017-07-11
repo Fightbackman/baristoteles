@@ -19,8 +19,7 @@
         <item name="android:windowBackground">@color/colorAccent</item>
     </style>
 
-    <dimen name="buttonHeight">110dp</dimen>
-    <dimen name="buttonWidth">100dp</dimen>
+    <dimen name="buttonFontSize">50dp</dimen>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

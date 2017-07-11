@@ -12,12 +12,11 @@ import android.content.DialogInterface
 import android.view.*
 import android.widget.ImageView
 import kotlinx.android.synthetic.main.add_dialog.view.*
-import android.app.Activity
 import android.content.Context
 import android.view.inputmethod.InputMethodManager
-import android.content.Context.INPUT_METHOD_SERVICE
-
-
+import android.R.attr.x
+import android.graphics.Point
+import android.widget.Button
 
 
 class MainActivity : AppCompatActivity() {
@@ -99,8 +98,18 @@ class MainActivity : AppCompatActivity() {
 
     private fun revealShow(mainView: View, b: Boolean, dialog: Dialog) {
         val dialogView : View = mainView.findViewById(R.id.add_dialog)
-        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(dialogView.windowToken, 0)
+        //Hide Keyboard
+        dialogView.postDelayed(Runnable {
+            val keyboard = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            keyboard.hideSoftInputFromWindow(dialogView.windowToken, 0)
+        }, 50)
+
+        //Set Proper fontsize
+        val size = Point()
+        windowManager.defaultDisplay.getSize(size)
+        val percent = .05f
+        dialogView.touchables.filterIsInstance<Button>().forEach { it: Button -> it.textSize = percent * size.x }
+
         dialogView.buttonNine.setOnClickListener { _ -> changeEditText(dialogView, { it.plus("9") }) }
         dialogView.buttonEight.setOnClickListener { _ -> changeEditText(dialogView, { it.plus("8") }) }
         dialogView.buttonSeven.setOnClickListener { _ -> changeEditText(dialogView, { it.plus("7") }) }
