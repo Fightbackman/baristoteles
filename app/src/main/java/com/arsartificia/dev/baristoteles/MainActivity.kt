@@ -18,6 +18,9 @@ import android.widget.Button
 import android.widget.ImageView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.weight_dialog.view.*
+import com.arsartificia.dev.baristoteles.R.id.fab
+
+
 
 
 class MainActivity : AppCompatActivity() {
@@ -44,6 +47,20 @@ class MainActivity : AppCompatActivity() {
         }
         var adapter = DataAdapter(input)
         recyclerView.adapter = adapter
+        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+                if (dy > 0 || dy < 0 && fab.isShown)
+                    fab.hide()
+            }
+
+            override fun onScrollStateChanged(recyclerView: RecyclerView?, newState: Int) {
+
+                if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    fab.show()
+                }
+                super.onScrollStateChanged(recyclerView, newState)
+            }
+        })
     }
 
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
@@ -124,8 +141,9 @@ class MainActivity : AppCompatActivity() {
         //Set Proper fontsize
         val size = Point()
         windowManager.defaultDisplay.getSize(size)
-        val percent = .05f
+        val percent = .03f
         dialogWeight.touchables.filterIsInstance<Button>().forEach { it: Button -> it.textSize = percent * size.x }
+        dialogWeight.editText.textSize = percent * size.x*2
 
         dialogWeight.buttonNine.setOnClickListener { _ -> changeEditText(dialogWeight, { it.plus("9") }) }
         dialogWeight.buttonEight.setOnClickListener { _ -> changeEditText(dialogWeight, { it.plus("8") }) }
