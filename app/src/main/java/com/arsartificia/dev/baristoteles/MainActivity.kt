@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.support.design.widget.Snackbar
+import android.support.v4.widget.TextViewCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -18,9 +19,6 @@ import android.widget.Button
 import android.widget.ImageView
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.weight_dialog.view.*
-import com.arsartificia.dev.baristoteles.R.id.fab
-
-
 
 
 class MainActivity : AppCompatActivity() {
@@ -138,12 +136,7 @@ class MainActivity : AppCompatActivity() {
             keyboard.hideSoftInputFromWindow(dialogWeight.windowToken, 0)
         }, 50)
 
-        //Set Proper fontsize
-        val size = Point()
-        windowManager.defaultDisplay.getSize(size)
-        val percent = .03f
-        dialogWeight.touchables.filterIsInstance<Button>().forEach { it: Button -> it.textSize = percent * size.x }
-        dialogWeight.editText.textSize = percent * size.x*2
+        dialogWeight.touchables.filterIsInstance<Button>().forEach { TextViewCompat.setAutoSizeTextTypeWithDefaults(it, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM) }
 
         dialogWeight.buttonNine.setOnClickListener { _ -> changeEditText(dialogWeight, { it.plus("9") }) }
         dialogWeight.buttonEight.setOnClickListener { _ -> changeEditText(dialogWeight, { it.plus("8") }) }
@@ -171,7 +164,7 @@ class MainActivity : AppCompatActivity() {
                 val imageView : ImageView = timeDialogView.findViewById(R.id.closeDialogImg)
                 createDialog(view, timeDialogView, imageView, MainActivity::stepTime, dialog)
             } catch (error: NumberFormatException) {
-                Snackbar.make(dialogWeight, "Please enter a proper number", Snackbar.LENGTH_LONG)
+                Snackbar.make(dialogWeight, "Please enter a proper number", Snackbar.LENGTH_SHORT)
                         .setAction("Action", null).show()
             } catch (error: Exception) {
                 Snackbar.make(dialogWeight, error.toString(), Snackbar.LENGTH_LONG)
