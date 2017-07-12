@@ -6,23 +6,24 @@ import android.content.Context
 import android.content.DialogInterface
 import android.graphics.Point
 import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.ImageView
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.weight_dialog.*
 import kotlinx.android.synthetic.main.weight_dialog.view.*
 
 
 class MainActivity : AppCompatActivity() {
 
     var weight: Float = 0f
+    lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +35,15 @@ class MainActivity : AppCompatActivity() {
             val imageView : ImageView = weightDialogView.findViewById(R.id.closeDialogImg)
             createDialog(view, weightDialogView, imageView, MainActivity::stepWeight)
         }
+        recyclerView = findViewById(R.id.recycler_view)
+        recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        val input = ArrayList<String>()
+        for (i in 0..99) {
+            input.add("Test" + i)
+        }
+        var adapter = DataAdapter(input)
+        recyclerView.adapter = adapter
     }
 
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
