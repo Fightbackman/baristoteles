@@ -184,8 +184,7 @@
 
     <android.support.v7.widget.AppCompatTextView
         android:layout_width="match_parent"
-        android:layout_height="50sp"
-        android:layout_weight="1"
+        android:layout_height="@dimen/nextButttonSize"
         style="@style/Base.TextAppearance.AppCompat.Widget.Button.Colored"
         android:id="@+id/buttonNext"
         android:background="@color/colorPrimary"

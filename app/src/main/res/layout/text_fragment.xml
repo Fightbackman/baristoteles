@@ -30,37 +30,27 @@
     </RelativeLayout>
 
     <android.support.v7.widget.AppCompatEditText
-        android:id="@+id/editText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:labelFor="@+id/infoTextView"
-        android:enabled="false"
-        android:inputType="numberDecimal"
-        android:gravity="center"
-        android:lines="1"
-        android:maxLines="1"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="40sp"/>
-
-    <android.support.v7.widget.AppCompatEditText
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
+        android:layout_weight="1"
         android:id="@+id/mainEditText"
         android:textSize="50sp"
         app:autoSizeTextType="uniform"
         android:singleLine="true"
-        android:textAlignment="center"/>
+        android:lines="1"
+        android:imeOptions="actionDone"
+        android:textAlignment="center"
+        android:gravity="top"/>
 
     <android.support.v7.widget.AppCompatTextView
         android:layout_width="match_parent"
-        android:layout_height="50sp"
+        android:layout_height="@dimen/nextButttonSize"
         style="@style/Base.TextAppearance.AppCompat.Widget.Button.Colored"
         android:id="@+id/buttonNext"
         android:background="@color/colorPrimary"
         android:textAlignment="center"
         android:text="Next"
         app:autoSizeTextType="uniform"
-        android:textColor="@color/colorPrimaryDark"/>
+        android:textColor="@color/colorPrimaryDark" />
 
 </LinearLayout>
