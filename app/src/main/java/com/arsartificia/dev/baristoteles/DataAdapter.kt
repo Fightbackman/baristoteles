@@ -4,6 +4,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.RatingBar
 import android.widget.TextView
 
 
@@ -13,12 +14,16 @@ class DataAdapter
     inner class ViewHolder(var layout: View) : RecyclerView.ViewHolder(layout) {
         var txtName: TextView
         var txtWeight: TextView
-        var txtRating: TextView
+        var txtTime: TextView
+        var txtRating: RatingBar
+        var txtNote: TextView
 
         init {
             txtName = layout.findViewById(R.id.coffeeNameTextView)
             txtWeight = layout.findViewById(R.id.weightTextView)
-            txtRating = layout.findViewById(R.id.ratingTextView)
+            txtTime = layout.findViewById(R.id.timeTextView)
+            txtRating = layout.findViewById(R.id.ratingBar)
+            txtNote = layout.findViewById(R.id.noteTextView)
         }
     }
 
@@ -44,6 +49,10 @@ class DataAdapter
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val e: Entry = values[position]
         holder.txtName.text = e.name
+        holder.txtWeight.text = e.weight
+        holder.txtTime.text = e.time
+        holder.txtRating.rating = e.rating
+        holder.txtNote.text = e.note
     }
 
     override fun getItemCount(): Int {

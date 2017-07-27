@@ -57,8 +57,7 @@ class WeightFragment : Fragment() {
             try {
                 val ma : MainActivity = activity as MainActivity
                 if (view.editText.text.isNotEmpty()) {
-                    val weight = view.editText.text.toString().dropLast(1)
-                    ma.weight = weight.toFloat()
+                    ma.weight = view.editText.text.toString()
                 }
                 val fragmentTransaction = fragmentManager.beginTransaction()
                 val timeFragment = TimeFragment()

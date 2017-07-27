@@ -13,9 +13,9 @@ import java.io.ObjectOutputStream
 
 class MainActivity : AppCompatActivity() {
     var name: String = ""
-    var grind: Int = 0
-    var time: Int = 0
-    var weight: Float = 0.0f
+    var grind: String = ""
+    var time: String = ""
+    var weight: String = ""
     var note: String = ""
     var rating: Float = 0.0f
     val filename = "baristoteles.data"
@@ -57,7 +57,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun loadData() {
-        //val f = File(filename).delete()
         try {
             val fis = openFileInput(filename)
             val ois = ObjectInputStream(fis)

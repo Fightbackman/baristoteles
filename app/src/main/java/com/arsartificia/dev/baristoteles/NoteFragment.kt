@@ -32,7 +32,7 @@ class NoteFragment : Fragment() {
 
         view.infoTextView.text = "Notes:"
         view.mainEditText.setBackgroundColor(Color.WHITE)
-        view.mainEditText.setHorizontallyScrolling(false)
+        view.mainEditText.setHorizontallyScrolling(true)
         view.mainEditText.setLines(5)
         view.mainEditText.setSingleLine(false)
         view.mainEditText.textSize = view.mainEditText.textSize/3

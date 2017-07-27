@@ -49,7 +49,7 @@ class TimeFragment : Fragment() {
             try {
                 val ma : MainActivity = activity as MainActivity
                 if (view.editText.text.isNotEmpty()) {
-                    val time = view.editText.text.toString().replace("s", "").replace("m", "").replace(":", "").replace(" ", "").toInt()
+                    val time = view.editText.text.toString()
                     ma.time = time
                 }
                 val fragmentTransaction = fragmentManager.beginTransaction()

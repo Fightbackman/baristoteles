@@ -6,9 +6,15 @@ import android.view.inputmethod.InputMethodManager
 import android.app.*
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.*
 import kotlinx.android.synthetic.main.data_fragment.*
 import kotlinx.android.synthetic.main.data_fragment.view.*
+import kotlinx.android.synthetic.main.row_layout.*
+import kotlinx.android.synthetic.main.row_layout.view.*
+import android.content.DialogInterface
+
+
 
 class DataFragment : Fragment() {
 
@@ -59,5 +65,32 @@ class DataFragment : Fragment() {
                 super.onScrollStateChanged(recyclerView, newState)
             }
         })
+
+        val simpleCallback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT ) {
+            override fun onMove(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder, target: RecyclerView.ViewHolder): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+                if (direction == ItemTouchHelper.LEFT || direction == ItemTouchHelper.RIGHT) {
+
+                    val builder = AlertDialog.Builder(ma)
+                    builder.setMessage("Are you sure to delete?")
+
+                    builder.setPositiveButton("REMOVE", DialogInterface.OnClickListener { dialog, which ->
+                        adapter.notifyItemRemoved(position)
+                        ma.data.removeAt(position)
+                        return@OnClickListener
+                    }).setNegativeButton("CANCEL", DialogInterface.OnClickListener { dialog, which ->
+                        adapter.notifyItemRemoved(position + 1)
+                        adapter.notifyItemRangeChanged(position, adapter.itemCount)
+                        return@OnClickListener
+                    }).show()
+                }
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(simpleCallback)
+        itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 }

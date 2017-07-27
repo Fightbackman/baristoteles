@@ -50,7 +50,7 @@ class GrindFragment : Fragment() {
             try {
                 val ma : MainActivity = activity as MainActivity
                 if (view.editText.text.isNotEmpty()) {
-                    ma.grind = view.editText.text.toString().toInt()
+                    ma.grind = view.editText.text.toString()
                 }
                 val fragmentTransaction = fragmentManager.beginTransaction()
                 val weightFragment = WeightFragment()
