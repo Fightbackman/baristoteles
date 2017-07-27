@@ -12,8 +12,15 @@ import kotlinx.android.synthetic.main.data_fragment.view.*
 
 class DataFragment : Fragment() {
 
+    lateinit var ma : MainActivity
+
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater!!.inflate(R.layout.data_fragment, container, false)
+    }
+
+    override fun onAttach(context: Context?) {
+        super.onAttach(context)
+        ma = activity as MainActivity
     }
 
     override fun onStart() {
@@ -36,11 +43,7 @@ class DataFragment : Fragment() {
         val recyclerView = view.recycler_view
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(context)
-        val input = ArrayList<String>()
-        for (i in 0..99) {
-            input.add("Test" + i)
-        }
-        var adapter = DataAdapter(input)
+        var adapter = DataAdapter(ma.data)
         recyclerView.adapter = adapter
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {

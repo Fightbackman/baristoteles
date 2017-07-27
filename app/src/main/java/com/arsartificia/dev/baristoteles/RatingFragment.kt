@@ -48,6 +48,7 @@ class RatingFragment : Fragment() {
             try {
                 val ma : MainActivity = activity as MainActivity
                 ma.rating = view.ratingBar.rating
+                ma.addData()
                 fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
                 val fragmentTransaction = fragmentManager.beginTransaction()
                 val dataFragment = DataFragment()

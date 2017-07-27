@@ -8,7 +8,7 @@ import android.widget.TextView
 
 
 class DataAdapter
-(private val values: MutableList<String>) : RecyclerView.Adapter<DataAdapter.ViewHolder>() {
+(private val values: MutableList<Entry>) : RecyclerView.Adapter<DataAdapter.ViewHolder>() {
 
     inner class ViewHolder(var layout: View) : RecyclerView.ViewHolder(layout) {
         var txtName: TextView
@@ -22,7 +22,7 @@ class DataAdapter
         }
     }
 
-    fun add(position: Int, item: String) {
+    fun add(position: Int, item: Entry) {
         values.add(position, item)
         notifyItemInserted(position)
     }
@@ -42,8 +42,8 @@ class DataAdapter
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val name = values[position]
-        holder.txtName.text = name
+        val e: Entry = values[position]
+        holder.txtName.text = e.name
     }
 
     override fun getItemCount(): Int {
