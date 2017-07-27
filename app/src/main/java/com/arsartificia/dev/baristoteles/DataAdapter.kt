@@ -14,6 +14,7 @@ class DataAdapter
     inner class ViewHolder(var layout: View) : RecyclerView.ViewHolder(layout) {
         var txtName: TextView
         var txtWeight: TextView
+        var txtGrind: TextView
         var txtTime: TextView
         var txtRating: RatingBar
         var txtNote: TextView
@@ -21,6 +22,7 @@ class DataAdapter
         init {
             txtName = layout.findViewById(R.id.coffeeNameTextView)
             txtWeight = layout.findViewById(R.id.weightTextView)
+            txtGrind = layout.findViewById(R.id.grindTextView)
             txtTime = layout.findViewById(R.id.timeTextView)
             txtRating = layout.findViewById(R.id.ratingBar)
             txtNote = layout.findViewById(R.id.noteTextView)
@@ -51,6 +53,7 @@ class DataAdapter
         holder.txtName.text = e.name
         holder.txtWeight.text = e.weight
         holder.txtTime.text = e.time
+        holder.txtGrind.text = e.grind
         holder.txtRating.rating = e.rating
         holder.txtNote.text = e.note
     }

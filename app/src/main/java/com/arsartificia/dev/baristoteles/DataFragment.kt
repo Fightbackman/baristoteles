@@ -10,15 +10,17 @@ import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.*
 import kotlinx.android.synthetic.main.data_fragment.*
 import kotlinx.android.synthetic.main.data_fragment.view.*
-import kotlinx.android.synthetic.main.row_layout.*
-import kotlinx.android.synthetic.main.row_layout.view.*
 import android.content.DialogInterface
+
+
 
 
 
 class DataFragment : Fragment() {
 
     lateinit var ma : MainActivity
+    lateinit var recyclerView: RecyclerView
+    lateinit var adapter: DataAdapter
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater!!.inflate(R.layout.data_fragment, container, false)
@@ -27,6 +29,16 @@ class DataFragment : Fragment() {
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         ma = activity as MainActivity
+    }
+
+    override fun onResume() {
+        super.onResume()
+        update()
+    }
+
+    private fun update() {
+        adapter = DataAdapter(ma.data)
+        recyclerView.adapter = adapter
     }
 
     override fun onStart() {
@@ -41,16 +53,15 @@ class DataFragment : Fragment() {
         fab.setOnClickListener { view ->
             val fragmentTransaction = fragmentManager.beginTransaction()
             val nameFragment = NameFragment()
-            fragmentTransaction.add(R.id.fragment_container, nameFragment)
+            fragmentTransaction.replace(R.id.fragment_container, nameFragment)
             fragmentTransaction.addToBackStack("NameFragment")
             fragmentTransaction.commit()
         }
 
-        val recyclerView = view.recycler_view
+        recyclerView = view.recycler_view
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(context)
-        var adapter = DataAdapter(ma.data)
-        recyclerView.adapter = adapter
+        update()
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 if (dy > 0 || dy < 0 && fab.isShown)

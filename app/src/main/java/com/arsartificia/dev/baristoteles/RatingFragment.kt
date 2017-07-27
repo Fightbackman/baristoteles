@@ -49,11 +49,7 @@ class RatingFragment : Fragment() {
                 val ma : MainActivity = activity as MainActivity
                 ma.rating = view.ratingBar.rating
                 ma.addData()
-                fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
-                val fragmentTransaction = fragmentManager.beginTransaction()
-                val dataFragment = DataFragment()
-                fragmentTransaction.add(R.id.fragment_container, dataFragment)
-                fragmentTransaction.commit()
+                fragmentManager.popBackStack("DataFragment", 0)
             } catch (error: Exception) {
                 Snackbar.make(view, error.toString(), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show()
