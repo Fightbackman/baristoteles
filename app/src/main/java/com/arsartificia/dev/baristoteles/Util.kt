@@ -13,15 +13,13 @@ import kotlinx.android.synthetic.main.text_fragment.view.*
 
 object Util {
     fun registerCircularReveal(context: Context, view: View, arguments: Bundle) {
-        AnimationUtils.registerCircularRevealAnimation(
+        AnimationUtils.registerCreateShareLinkCircularRevealAnimation(
                 context,
                 view,
                 arguments.getInt("centerX"),
                 arguments.getInt("centerY"),
                 arguments.getInt("width"),
-                arguments.getInt("height"),
-                context.getColor(R.color.colorPrimary),
-                context.getColor(R.color.colorAccent))
+                arguments.getInt("height"))
     }
 
     fun  initializeFragment(activity: Activity, context: Context, view: View, fragmentManager: FragmentManager, backIcon: Boolean, hideInput: Boolean) {
@@ -65,7 +63,7 @@ object Util {
         args.putInt("width", view.width)
         args.putInt("height", view.height)
         newFragment.arguments = args
-        fragmentTransaction.replace(R.id.fragment_container, newFragment)
+        fragmentTransaction.add(R.id.fragment_container, newFragment)
         fragmentTransaction.addToBackStack(name)
         fragmentTransaction.commit()
     }

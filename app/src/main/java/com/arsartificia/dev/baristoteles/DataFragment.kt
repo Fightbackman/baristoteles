@@ -46,7 +46,12 @@ class DataFragment : Fragment() {
         Util.hideKeyboard(activity, view)
 
         fab.setOnClickListener { fab ->
-            Util.transitionFragment(fragmentManager, NameFragment(), "NameFragment", fab, view)
+            try {
+                Util.transitionFragment(fragmentManager, NameFragment(), "NameFragment", fab, view)
+            } catch (error: Exception) {
+                println(error)
+            }
+
         }
 
         recyclerView = view.recycler_view
