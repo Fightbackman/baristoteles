@@ -5,12 +5,18 @@ import android.support.design.widget.Snackbar
 import android.app.*
 import android.view.*
 import kotlinx.android.synthetic.main.text_fragment.view.*
+import android.widget.AutoCompleteTextView
+import android.widget.ArrayAdapter
+
+
 
 class NameFragment : Fragment() {
+    lateinit var ma: MainActivity
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view = inflater!!.inflate(R.layout.text_fragment, container, false)
         Util.registerCircularReveal(context, view, arguments)
+        ma = activity as MainActivity
         return view
     }
 
@@ -22,6 +28,15 @@ class NameFragment : Fragment() {
         view.infoTextView.text = "Name:"
         view.mainEditText.setHorizontallyScrolling(false)
         view.mainEditText.setLines(5)
+
+        val names = ArrayList<String>()
+        for (d in ma.data) {
+            names.add(d.name)
+        }
+        val adapter = ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, names)
+        val textView = view.mainEditText as AutoCompleteTextView
+        textView.setAdapter(adapter)
+
 
         view.buttonNext.setOnClickListener {
             try {
