@@ -28,16 +28,7 @@ class DataFragment : Fragment() {
     override fun onAttach(context: Context?) {
         super.onAttach(context)
         ma = activity as MainActivity
-    }
-
-    override fun onResume() {
-        super.onResume()
-        update()
-    }
-
-    private fun update() {
-        adapter = DataAdapter(ma.data)
-        recyclerView.adapter = adapter
+        ma.dataFragment = this
     }
 
     override fun onStart() {
@@ -57,7 +48,8 @@ class DataFragment : Fragment() {
         recyclerView = view.recycler_view
         recyclerView.setHasFixedSize(true)
         recyclerView.layoutManager = LinearLayoutManager(context)
-        update()
+        adapter = DataAdapter(ma.data)
+        recyclerView.adapter = adapter
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
                 if (dy > 0 || dy < 0 && fab.isShown)

@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     var note: String = ""
     var rating: Float = 0.0f
     val filename = "baristoteles.data"
+    lateinit var dataFragment: DataFragment
     var data = ArrayList<Entry>()
 
 
@@ -55,6 +56,7 @@ class MainActivity : AppCompatActivity() {
     fun addData() {
         data.add(Entry(name, grind, time, weight, note, rating))
         resetTempData()
+        dataFragment?.adapter.notifyItemInserted(data.size)
     }
 
     fun resetTempData() {
