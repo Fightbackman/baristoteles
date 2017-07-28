@@ -53,7 +53,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun addData() {
-        val al = ArrayList<String>()
         data.add(Entry(name, grind, time, weight, note, rating))
         resetTempData()
     }
@@ -71,6 +70,7 @@ class MainActivity : AppCompatActivity() {
         try {
             val fis = openFileInput(filename)
             val ois = ObjectInputStream(fis)
+            @Suppress("UNCHECKED_CAST")
             data = ois.readObject() as ArrayList<Entry>
             ois.close()
         } catch (error: FileNotFoundException) {

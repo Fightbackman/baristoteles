@@ -1,57 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:background="@color/colorAccent">
+    app:cardBackgroundColor="@color/darkgray"
+    app:cardElevation="2dp"
+    app:cardPreventCornerOverlap="false"
+    app:cardUseCompatPadding="true"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:layout_gravity="center_horizontal">
 
-    <RelativeLayout
+    <LinearLayout
+        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/closeDialogImg"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_margin="10dp"
-            android:src="@drawable/ic_close_black_24dp"
-            android:tint="#000"
-            android:contentDescription="@string/close_the_dialog" />
+        android:orientation="vertical"
+        android:background="@color/colorAccent">
 
-        <TextView
-            android:id="@+id/infoTextView"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/closeDialogImg"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_close_black_24dp"
+                android:tint="#000"
+                android:contentDescription="@string/close_the_dialog" />
+
+            <TextView
+                android:id="@+id/infoTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="50sp" />
+
+        </RelativeLayout>
+
+        <android.support.v7.widget.AppCompatEditText
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:id="@+id/mainEditText"
+            android:textSize="50sp"
+            app:autoSizeTextType="uniform"
+            android:singleLine="true"
+            android:lines="1"
+            android:imeOptions="actionDone"
             android:textAlignment="center"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="50sp" />
+            android:gravity="top"/>
 
-    </RelativeLayout>
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            style="@style/Base.TextAppearance.AppCompat.Widget.Button.Colored"
+            android:id="@+id/buttonNext"
+            android:background="@color/colorPrimary"
+            android:textAlignment="center"
+            android:text="Next"
+            app:autoSizeTextType="uniform"
+            android:textColor="@color/colorPrimaryDark" />
 
-    <android.support.v7.widget.AppCompatEditText
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="5"
-        android:id="@+id/mainEditText"
-        android:textSize="50sp"
-        app:autoSizeTextType="uniform"
-        android:singleLine="true"
-        android:lines="1"
-        android:imeOptions="actionDone"
-        android:textAlignment="center"
-        android:gravity="top"/>
-
-    <android.support.v7.widget.AppCompatTextView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        style="@style/Base.TextAppearance.AppCompat.Widget.Button.Colored"
-        android:id="@+id/buttonNext"
-        android:background="@color/colorPrimary"
-        android:textAlignment="center"
-        android:text="Next"
-        app:autoSizeTextType="uniform"
-        android:textColor="@color/colorPrimaryDark" />
-
-</LinearLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>

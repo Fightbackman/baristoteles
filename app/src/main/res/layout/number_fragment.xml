@@ -1,197 +1,210 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<android.support.v7.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:id="@+id/weight_dialog"
-    android:background="@color/colorAccent">
-
-    <RelativeLayout
+    app:cardBackgroundColor="@color/darkgray"
+    app:cardElevation="2dp"
+    app:cardPreventCornerOverlap="false"
+    app:cardUseCompatPadding="true"
+    android:layout_marginLeft="8dp"
+    android:layout_marginRight="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginBottom="8dp"
+    android:layout_gravity="center_horizontal">
+    <LinearLayout
+        android:layout_height="match_parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/closeDialogImg"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_margin="10dp"
-            android:src="@drawable/ic_close_black_24dp"
-            android:tint="#000"
-            android:contentDescription="@string/close_the_dialog" />
+        android:orientation="vertical"
+        android:id="@+id/weight_dialog"
+        android:background="@color/colorAccent">
 
-        <TextView
-            android:id="@+id/infoTextView"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/closeDialogImg"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:src="@drawable/ic_close_black_24dp"
+                android:tint="#000"
+                android:contentDescription="@string/close_the_dialog" />
+
+            <TextView
+                android:id="@+id/infoTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="50sp" />
+
+        </RelativeLayout>
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/editText"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:labelFor="@+id/infoTextView"
+            android:enabled="false"
+            android:inputType="numberDecimal"
+            android:gravity="center"
+            android:lines="1"
+            android:maxLines="1"
             android:textColor="@color/colorPrimaryDark"
-            android:textSize="50sp" />
+            android:textSize="40sp"/>
 
-    </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/buttonSeven"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="7"
+                app:autoSizeTextType="uniform"/>
 
-    <android.support.v7.widget.AppCompatEditText
-        android:id="@+id/editText"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:labelFor="@+id/infoTextView"
-        android:enabled="false"
-        android:inputType="numberDecimal"
-        android:gravity="center"
-        android:lines="1"
-        android:maxLines="1"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="40sp"/>
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/buttonEight"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="8"
+                app:autoSizeTextType="uniform"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:layout_weight="1">
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/buttonSeven"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="7"
-            app:autoSizeTextType="uniform"/>
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/buttonNine"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="9"
+                app:autoSizeTextType="uniform"/>
+        </LinearLayout>
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/buttonEight"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="8"
-            app:autoSizeTextType="uniform"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="1">
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/buttonNine"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="9"
-            app:autoSizeTextType="uniform"/>
-    </LinearLayout>
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/buttonFour"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="4"
+                app:autoSizeTextType="uniform"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:layout_weight="1">
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/buttonFive"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="5"
+                app:autoSizeTextType="uniform"/>
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/buttonFour"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="4"
-            app:autoSizeTextType="uniform"/>
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/buttonSix"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="6"
+                app:autoSizeTextType="uniform"/>
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/buttonFive"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="5"
-            app:autoSizeTextType="uniform"/>
+        </LinearLayout>
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/buttonSix"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="6"
-            app:autoSizeTextType="uniform"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="1">
 
-    </LinearLayout>
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/buttonOne"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="1"
+                app:autoSizeTextType="uniform"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:layout_weight="1">
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/buttonTwo"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="2"
+                app:autoSizeTextType="uniform"/>
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/buttonOne"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="1"
-            app:autoSizeTextType="uniform"/>
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/buttonThree"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="3"
+                app:autoSizeTextType="uniform"/>
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/buttonTwo"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="2"
-            app:autoSizeTextType="uniform"/>
+        </LinearLayout>
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/buttonThree"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="3"
-            app:autoSizeTextType="uniform"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:layout_weight="1">
 
-    </LinearLayout>
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/buttonDot"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="."
+                app:autoSizeTextType="uniform"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:layout_weight="1">
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/buttonZero"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="0"
+                app:autoSizeTextType="uniform"/>
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/buttonDot"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="."
-            app:autoSizeTextType="uniform"/>
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/buttonDelete"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:text="\u232b"
+                app:autoSizeTextType="uniform"/>
 
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/buttonZero"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
-            android:layout_weight="1"
-            android:text="0"
-            app:autoSizeTextType="uniform"/>
+        </LinearLayout>
 
         <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/buttonDelete"
-            style="@style/Widget.AppCompat.Button.Borderless"
-            android:layout_height="match_parent"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="\u232b"
-            app:autoSizeTextType="uniform"/>
+            style="@style/Base.TextAppearance.AppCompat.Widget.Button.Colored"
+            android:id="@+id/buttonNext"
+            android:background="@color/colorPrimary"
+            android:textAlignment="center"
+            android:text="Next"
+            app:autoSizeTextType="uniform"
+            android:textColor="@color/colorPrimaryDark"/>
 
     </LinearLayout>
-
-    <android.support.v7.widget.AppCompatTextView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        style="@style/Base.TextAppearance.AppCompat.Widget.Button.Colored"
-        android:id="@+id/buttonNext"
-        android:background="@color/colorPrimary"
-        android:textAlignment="center"
-        android:text="Next"
-        app:autoSizeTextType="uniform"
-        android:textColor="@color/colorPrimaryDark"/>
-
-</LinearLayout>
+</android.support.v7.widget.CardView>

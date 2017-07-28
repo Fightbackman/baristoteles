@@ -5,14 +5,12 @@ import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import android.app.*
 import android.content.DialogInterface
-import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.*
 import kotlinx.android.synthetic.main.data_fragment.*
 import kotlinx.android.synthetic.main.data_fragment.view.*
-import java.util.*
 
 
 class DataFragment : Fragment() {
@@ -50,7 +48,7 @@ class DataFragment : Fragment() {
             keyboard.hideSoftInputFromWindow(view.windowToken, 0)
         }, 50)
 
-        fab.setOnClickListener { view ->
+        fab.setOnClickListener { _ ->
             val fragmentTransaction = fragmentManager.beginTransaction()
             val nameFragment = NameFragment()
             fragmentTransaction.replace(R.id.fragment_container, nameFragment)
@@ -88,11 +86,11 @@ class DataFragment : Fragment() {
                     val builder = AlertDialog.Builder(ma)
                     builder.setMessage("Are you sure to delete?")
 
-                    builder.setPositiveButton("REMOVE", DialogInterface.OnClickListener { dialog, which ->
+                    builder.setPositiveButton("REMOVE", DialogInterface.OnClickListener { _, _ ->
                         adapter.notifyItemRemoved(position)
                         ma.data.removeAt(position)
                         return@OnClickListener
-                    }).setNegativeButton("CANCEL", DialogInterface.OnClickListener { dialog, which ->
+                    }).setNegativeButton("CANCEL", DialogInterface.OnClickListener { _, _->
                         adapter.notifyItemRemoved(position + 1)
                         adapter.notifyItemRangeChanged(position, adapter.itemCount)
                         return@OnClickListener
