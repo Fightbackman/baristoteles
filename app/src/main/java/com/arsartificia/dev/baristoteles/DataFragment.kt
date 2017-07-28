@@ -19,6 +19,7 @@ class DataFragment : Fragment() {
     lateinit var recyclerView: RecyclerView
     lateinit var adapter: DataAdapter
     lateinit var temp : Entry
+    lateinit var args: Bundle
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater!!.inflate(R.layout.data_fragment, container, false)
@@ -48,9 +49,15 @@ class DataFragment : Fragment() {
             keyboard.hideSoftInputFromWindow(view.windowToken, 0)
         }, 50)
 
-        fab.setOnClickListener { _ ->
+        fab.setOnClickListener { fab ->
             val fragmentTransaction = fragmentManager.beginTransaction()
             val nameFragment = NameFragment()
+            val args = Bundle()
+            args.putInt("centerX", (fab.x+fab.width/2).toInt())
+            args.putInt("centerY", (fab.y+fab.height/2).toInt())
+            args.putInt("width", view.width)
+            args.putInt("height", view.height)
+            nameFragment.arguments = args
             fragmentTransaction.replace(R.id.fragment_container, nameFragment)
             fragmentTransaction.addToBackStack("NameFragment")
             fragmentTransaction.commit()

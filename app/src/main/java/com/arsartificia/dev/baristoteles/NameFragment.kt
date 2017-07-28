@@ -4,8 +4,7 @@ import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.app.*
 import android.content.Context
-import android.text.InputType
-import android.text.TextWatcher
+import android.os.Handler
 import android.view.*
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
@@ -14,7 +13,17 @@ import kotlinx.android.synthetic.main.text_fragment.view.*
 class NameFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        return inflater!!.inflate(R.layout.text_fragment, container, false)
+        val view = inflater!!.inflate(R.layout.text_fragment, container, false)
+        AnimationUtils.registerCircularRevealAnimation(
+                context,
+                view,
+                arguments.getInt("centerX"),
+                arguments.getInt("centerY"),
+                arguments.getInt("width"),
+                arguments.getInt("height"),
+                context.getColor(R.color.colorPrimary),
+                context.getColor(R.color.colorAccent))
+        return view
     }
 
     override fun onStart() {
@@ -24,11 +33,16 @@ class NameFragment : Fragment() {
         imageView.setOnClickListener({ fragmentManager.popBackStack() })
 
         view.infoTextView.text = "Name:"
-        view.mainEditText.requestFocus()
         view.mainEditText.setHorizontallyScrolling(false)
         view.mainEditText.setLines(5)
-        val imm : InputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.showSoftInput(view.mainEditText, InputMethodManager.SHOW_IMPLICIT)
+
+        val handler = Handler()
+        handler.postDelayed(Runnable {
+            view.mainEditText.requestFocus()
+            val imm : InputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.showSoftInput(view.mainEditText, InputMethodManager.SHOW_IMPLICIT)
+        }, 500)
+
         view.buttonNext.setOnClickListener {
             try {
                 if (view.mainEditText.text.isEmpty()) {

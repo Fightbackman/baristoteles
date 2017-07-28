@@ -8,6 +8,8 @@ import android.widget.RatingBar
 import android.widget.TextView
 
 
+
+
 class DataAdapter
 (private val values: MutableList<Entry>) : RecyclerView.Adapter<DataAdapter.ViewHolder>() {
 
