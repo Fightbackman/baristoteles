@@ -15,22 +15,14 @@ class GrindFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view = inflater!!.inflate(R.layout.number_fragment, container, false)
+        Util.registerCircularReveal(context, view, arguments)
         return view
     }
 
     override fun onStart() {
         super.onStart()
 
-        //Hide Keyboard
-        view.postDelayed({
-            val keyboard = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            keyboard.hideSoftInputFromWindow(view.windowToken, 0)
-        }, 50)
-
-        val imageView : ImageView = view.findViewById(R.id.closeDialogImg)
-        imageView.setOnClickListener({ fragmentManager.popBackStack() })
-
-
+        Util.initializeFragment(activity, context, view, fragmentManager, true, true)
 
         view.touchables.filterIsInstance<Button>().forEach { TextViewCompat.setAutoSizeTextTypeWithDefaults(it, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM) }
 
@@ -53,11 +45,7 @@ class GrindFragment : Fragment() {
                 if (view.editText.text.isNotEmpty()) {
                     ma.grind = view.editText.text.toString()
                 }
-                val fragmentTransaction = fragmentManager.beginTransaction()
-                val weightFragment = WeightFragment()
-                fragmentTransaction.add(R.id.fragment_container, weightFragment)
-                fragmentTransaction.addToBackStack("WeightFragment")
-                fragmentTransaction.commit()
+                Util.transitionFragment(fragmentManager, WeightFragment(), "WeightFragment", view.buttonNext, view)
             } catch (error: NumberFormatException) {
                 Snackbar.make(view, "Please enter a proper number", Snackbar.LENGTH_SHORT)
                         .setAction("Action", null).show()

@@ -43,24 +43,10 @@ class DataFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        //Hide Keyboard
-        view.postDelayed({
-            val keyboard = activity.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            keyboard.hideSoftInputFromWindow(view.windowToken, 0)
-        }, 50)
+        Util.hideKeyboard(activity, view)
 
         fab.setOnClickListener { fab ->
-            val fragmentTransaction = fragmentManager.beginTransaction()
-            val nameFragment = NameFragment()
-            val args = Bundle()
-            args.putInt("centerX", (fab.x+fab.width/2).toInt())
-            args.putInt("centerY", (fab.y+fab.height/2).toInt())
-            args.putInt("width", view.width)
-            args.putInt("height", view.height)
-            nameFragment.arguments = args
-            fragmentTransaction.replace(R.id.fragment_container, nameFragment)
-            fragmentTransaction.addToBackStack("NameFragment")
-            fragmentTransaction.commit()
+            Util.transitionFragment(fragmentManager, NameFragment(), "NameFragment", fab, view)
         }
 
         recyclerView = view.recycler_view
