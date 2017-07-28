@@ -33,7 +33,7 @@
     <android.support.v7.widget.AppCompatEditText
         android:id="@+id/editText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1"
         android:labelFor="@+id/infoTextView"
         android:enabled="false"
@@ -46,7 +46,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:orientation="horizontal"
         android:layout_weight="1">
         <android.support.v7.widget.AppCompatTextView
@@ -79,7 +79,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:orientation="horizontal"
         android:layout_weight="1">
 
@@ -114,7 +114,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:orientation="horizontal"
         android:layout_weight="1">
 
@@ -149,7 +149,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:orientation="horizontal"
         android:layout_weight="1">
 
@@ -184,7 +184,8 @@
 
     <android.support.v7.widget.AppCompatTextView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/nextButttonSize"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         style="@style/Base.TextAppearance.AppCompat.Widget.Button.Colored"
         android:id="@+id/buttonNext"
         android:background="@color/colorPrimary"
