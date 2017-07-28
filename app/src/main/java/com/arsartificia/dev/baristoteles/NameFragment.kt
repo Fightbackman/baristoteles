@@ -42,8 +42,8 @@ class NameFragment : Fragment() {
                 fragmentTransaction.addToBackStack("GrindFragment")
                 fragmentTransaction.commit()
             } catch (error: IllegalArgumentException) {
-                Snackbar.make(view, error.toString(), Snackbar.LENGTH_SHORT)
-                        .setAction("Please Enter a Name", null).show()
+                Snackbar.make(view, "Please Enter a name", Snackbar.LENGTH_SHORT)
+                        .setAction("Action", null).show()
             } catch (error: Exception) {
                 Snackbar.make(view, error.toString(), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show()

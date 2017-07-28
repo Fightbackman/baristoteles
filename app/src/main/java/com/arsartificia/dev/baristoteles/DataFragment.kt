@@ -4,16 +4,15 @@ import android.content.Context
 import android.os.Bundle
 import android.view.inputmethod.InputMethodManager
 import android.app.*
+import android.content.DialogInterface
+import android.support.design.widget.Snackbar
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
 import android.view.*
 import kotlinx.android.synthetic.main.data_fragment.*
 import kotlinx.android.synthetic.main.data_fragment.view.*
-import android.content.DialogInterface
-
-
-
+import java.util.*
 
 
 class DataFragment : Fragment() {
@@ -21,6 +20,7 @@ class DataFragment : Fragment() {
     lateinit var ma : MainActivity
     lateinit var recyclerView: RecyclerView
     lateinit var adapter: DataAdapter
+    lateinit var temp : Entry
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater!!.inflate(R.layout.data_fragment, container, false)
@@ -85,7 +85,6 @@ class DataFragment : Fragment() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 val position = viewHolder.adapterPosition
                 if (direction == ItemTouchHelper.LEFT || direction == ItemTouchHelper.RIGHT) {
-
                     val builder = AlertDialog.Builder(ma)
                     builder.setMessage("Are you sure to delete?")
 

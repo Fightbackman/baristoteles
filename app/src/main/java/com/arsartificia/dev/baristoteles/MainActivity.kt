@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.*
 import kotlinx.android.synthetic.main.activity_main.*
 import java.io.File
+import java.io.FileNotFoundException
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
 
@@ -54,6 +55,16 @@ class MainActivity : AppCompatActivity() {
     fun addData() {
         val al = ArrayList<String>()
         data.add(Entry(name, grind, time, weight, note, rating))
+        resetTempData()
+    }
+
+    fun resetTempData() {
+        name = ""
+        grind = ""
+        time = ""
+        weight = ""
+        note = ""
+        rating = 0.0f
     }
 
     fun loadData() {
@@ -62,6 +73,8 @@ class MainActivity : AppCompatActivity() {
             val ois = ObjectInputStream(fis)
             data = ois.readObject() as ArrayList<Entry>
             ois.close()
+        } catch (error: FileNotFoundException) {
+            // This is okay. Happens on the first run
         } catch (error: Exception) {
             Snackbar.make(findViewById(R.id.root_layout), error.toString(), Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
