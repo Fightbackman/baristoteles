@@ -15,7 +15,7 @@ class NameFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view = inflater!!.inflate(R.layout.text_fragment, container, false)
-        Util.registerCircularReveal(context, view, arguments)
+        Util.registerCircularReveal(activity, view, arguments)
         ma = activity as MainActivity
         return view
     }
@@ -23,17 +23,15 @@ class NameFragment : Fragment() {
     override fun onStart() {
         super.onStart()
 
-        Util.initializeFragment(activity, context, view, fragmentManager, false, false)
+        Util.initializeFragment(activity, view, fragmentManager, false, false)
 
-        view.infoTextView.text = "Name:"
+        view.infoTextView.text = getString(R.string.name)
         view.mainEditText.setHorizontallyScrolling(false)
         view.mainEditText.setLines(5)
 
         val names = ArrayList<String>()
-        for (d in ma.data) {
-            names.add(d.name)
-        }
-        val adapter = ArrayAdapter<String>(context, android.R.layout.simple_dropdown_item_1line, names)
+        ma.data.mapTo(names) { it.name }
+        val adapter = ArrayAdapter<String>(activity, android.R.layout.simple_dropdown_item_1line, names)
         val textView = view.mainEditText as AutoCompleteTextView
         textView.setAdapter(adapter)
 

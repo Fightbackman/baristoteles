@@ -1,32 +1,31 @@
 package com.arsartificia.dev.baristoteles
 
-import android.content.Context
+import android.app.Fragment
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v4.widget.TextViewCompat
-import android.view.inputmethod.InputMethodManager
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Button
-import android.app.*
-import android.view.*
-import android.widget.ImageView
 import kotlinx.android.synthetic.main.number_fragment.view.*
 
 class TimeFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view = inflater!!.inflate(R.layout.number_fragment, container, false)
-        Util.registerCircularReveal(context, view, arguments)
+        Util.registerCircularReveal(activity, view, arguments)
         return view
     }
 
     override fun onStart() {
         super.onStart()
 
-        Util.initializeFragment(activity, context, view, fragmentManager, true, true)
+        Util.initializeFragment(activity, view, fragmentManager, true, true)
 
         view.touchables.filterIsInstance<Button>().forEach { TextViewCompat.setAutoSizeTextTypeWithDefaults(it, TextViewCompat.AUTO_SIZE_TEXT_TYPE_UNIFORM) }
 
-        view.infoTextView.text = "Time:"
+        view.infoTextView.text = getString(R.string.time)
         view.buttonNine.setOnClickListener { _ -> changeEditText(view, { it.plus("9") }) }
         view.buttonEight.setOnClickListener { _ -> changeEditText(view, { it.plus("8") }) }
         view.buttonSeven.setOnClickListener { _ -> changeEditText(view, { it.plus("7") }) }

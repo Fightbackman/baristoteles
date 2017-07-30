@@ -2,7 +2,6 @@ package com.arsartificia.dev.baristoteles
 
 import android.content.Context
 import android.os.Bundle
-import android.view.inputmethod.InputMethodManager
 import android.app.*
 import android.content.DialogInterface
 import android.support.v7.widget.LinearLayoutManager
@@ -18,17 +17,9 @@ class DataFragment : Fragment() {
     lateinit var ma : MainActivity
     lateinit var recyclerView: RecyclerView
     lateinit var adapter: DataAdapter
-    lateinit var temp : Entry
-    lateinit var args: Bundle
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
         return inflater!!.inflate(R.layout.data_fragment, container, false)
-    }
-
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        ma = activity as MainActivity
-        ma.dataFragment = this
     }
 
     override fun onStart() {
@@ -45,9 +36,12 @@ class DataFragment : Fragment() {
 
         }
 
+        ma = activity as MainActivity
+        ma.dataFragment = this
+
         recyclerView = view.recycler_view
         recyclerView.setHasFixedSize(true)
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.layoutManager = LinearLayoutManager(activity)
         adapter = DataAdapter(ma.data)
         recyclerView.adapter = adapter
         recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {

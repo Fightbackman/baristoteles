@@ -4,9 +4,11 @@ import android.app.Activity
 import android.app.Fragment
 import android.app.FragmentManager
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
+import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.ImageView
 import kotlinx.android.synthetic.main.text_fragment.view.*
@@ -22,7 +24,7 @@ object Util {
                 arguments.getInt("height"))
     }
 
-    fun  initializeFragment(activity: Activity, context: Context, view: View, fragmentManager: FragmentManager, backIcon: Boolean, hideInput: Boolean) {
+    fun  initializeFragment(activity: Activity, view: View, fragmentManager: FragmentManager, backIcon: Boolean, hideInput: Boolean) {
         val imageView : ImageView = view.findViewById(R.id.closeDialogImg)
         imageView.setOnClickListener({ fragmentManager.popBackStack() })
         if (backIcon){
@@ -34,13 +36,13 @@ object Util {
         if (hideInput) {
             hideKeyboard(activity, view)
         } else {
-            showKeyboard(500, view, context)
+            showKeyboard(500, view, activity)
         }
     }
 
     fun showKeyboard(delay: Long, view:View, context: Context) {
         val handler = Handler()
-        handler.postDelayed(Runnable {
+        handler.postDelayed({
             view.mainEditText.requestFocus()
             val imm: InputMethodManager = context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             imm.showSoftInput(view.mainEditText, InputMethodManager.SHOW_IMPLICIT)

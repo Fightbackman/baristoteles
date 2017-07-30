@@ -28,7 +28,7 @@
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_margin="10dp"
-                android:src="@drawable/ic_close_black_24dp"
+                app:srcCompat="@drawable/ic_close_black_24dp"
                 android:tint="#000"
                 android:contentDescription="@string/close_the_dialog" />
 
@@ -63,7 +63,7 @@
             android:id="@+id/buttonNext"
             android:background="@color/colorPrimary"
             android:textAlignment="center"
-            android:text="Next"
+            android:text="@string/next_button"
             app:autoSizeTextType="uniform"
             android:textColor="@color/colorPrimaryDark" />
 

@@ -11,31 +11,17 @@ class DataAdapter
 (private val values: MutableList<Entry>) : RecyclerView.Adapter<DataAdapter.ViewHolder>() {
 
     inner class ViewHolder(var layout: View) : RecyclerView.ViewHolder(layout) {
-        var txtName: TextView
-        var txtWeight: TextView
-        var txtGrind: TextView
-        var txtTime: TextView
-        var txtRating: RatingBar
-        var txtNote: TextView
-
-        init {
-            txtName = layout.findViewById(R.id.coffeeNameTextView)
-            txtWeight = layout.findViewById(R.id.weightTextView)
-            txtGrind = layout.findViewById(R.id.grindTextView)
-            txtTime = layout.findViewById(R.id.timeTextView)
-            txtRating = layout.findViewById(R.id.ratingBar)
-            txtNote = layout.findViewById(R.id.noteTextView)
-        }
+        var txtName: TextView = layout.findViewById(R.id.coffeeNameTextView)
+        var txtWeight: TextView = layout.findViewById(R.id.weightTextView)
+        var txtGrind: TextView = layout.findViewById(R.id.grindTextView)
+        var txtTime: TextView = layout.findViewById(R.id.timeTextView)
+        var txtRating: RatingBar = layout.findViewById(R.id.ratingBar)
+        var txtNote: TextView = layout.findViewById(R.id.noteTextView)
     }
 
     fun add(position: Int, item: Entry) {
         values.add(position, item)
         notifyItemInserted(position)
-    }
-
-    fun remove(position: Int) {
-        values.removeAt(position)
-        notifyItemRemoved(position)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup,

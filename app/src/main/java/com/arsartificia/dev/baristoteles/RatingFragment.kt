@@ -1,12 +1,12 @@
 package com.arsartificia.dev.baristoteles
 
+import android.app.Fragment
 import android.content.Context
 import android.os.Bundle
-import android.view.inputmethod.InputMethodManager
-import android.app.*
 import android.support.design.widget.Snackbar
-import android.view.*
-import android.widget.ImageView
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import kotlinx.android.synthetic.main.star_fragment.view.*
 
 class RatingFragment : Fragment() {
@@ -15,27 +15,24 @@ class RatingFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view = inflater!!.inflate(R.layout.star_fragment, container, false)
-        Util.registerCircularReveal(context, view, arguments)
+        Util.registerCircularReveal(activity, view, arguments)
         return view
-    }
-
-    override fun onAttach(context: Context?) {
-        super.onAttach(context)
-        ma = activity as MainActivity
     }
 
     override fun onStart() {
         super.onStart()
 
-        Util.initializeFragment(activity, context, view, fragmentManager, true, true)
+        Util.initializeFragment(activity, view, fragmentManager, true, true)
 
-        view.infoTextView.text = "Rating:"
+        ma = activity as MainActivity
+
+        view.infoTextView.text = getString(R.string.rating)
         val summary =
                 "Name: ${ma.name}\n" +
                 "Grind: ${ma.grind}\n" +
                 "Weight: ${ma.weight}\n" +
                 "Time: ${ma.time}\n\n" +
-                "${ma.note}"
+                        ma.note
         view.summaryTextView.text = summary
 
         view.buttonNext.setOnClickListener {

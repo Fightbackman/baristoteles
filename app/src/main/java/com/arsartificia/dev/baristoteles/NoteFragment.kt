@@ -1,29 +1,28 @@
 package com.arsartificia.dev.baristoteles
 
+import android.app.Fragment
+import android.graphics.Color
 import android.os.Bundle
 import android.support.design.widget.Snackbar
-import android.app.*
-import android.content.Context
-import android.graphics.Color
-import android.view.*
-import android.view.inputmethod.InputMethodManager
-import android.widget.ImageView
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import kotlinx.android.synthetic.main.text_fragment.view.*
 
 class NoteFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view = inflater!!.inflate(R.layout.text_fragment, container, false)
-        Util.registerCircularReveal(context, view, arguments)
+        Util.registerCircularReveal(activity, view, arguments)
         return view
     }
 
     override fun onStart() {
         super.onStart()
 
-        Util.initializeFragment(activity, context, view, fragmentManager, true, true)
+        Util.initializeFragment(activity, view, fragmentManager, true, true)
 
-        view.infoTextView.text = "Notes:"
+        view.infoTextView.text = getString(R.string.notes)
         view.mainEditText.setBackgroundColor(Color.WHITE)
         view.mainEditText.setHorizontallyScrolling(true)
         view.mainEditText.setLines(5)

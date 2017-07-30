@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Baristoteles</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="close_the_dialog">Dialog schließen</string>
+    <string name="next_button">Weiter</string>
+    <string name="done_button">Fertig</string>
+    <string name="grind">Mahlgrad:</string>
+    <string name="name">Name:</string>
+    <string name="notes">Notizen:</string>
+    <string name="rating">Bewertung:</string>
+    <string name="time">Zeit:</string>
+    <string name="weight">Gewicht:</string>
+</resources>

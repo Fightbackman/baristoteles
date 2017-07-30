@@ -4,9 +4,8 @@ import android.content.Context
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity
-import android.view.*
+import android.view.Menu
 import kotlinx.android.synthetic.main.activity_main.*
-import java.io.File
 import java.io.FileNotFoundException
 import java.io.ObjectInputStream
 import java.io.ObjectOutputStream
@@ -56,7 +55,7 @@ class MainActivity : AppCompatActivity() {
     fun addData() {
         data.add(Entry(name, grind, time, weight, note, rating))
         resetTempData()
-        dataFragment?.adapter.notifyItemInserted(data.size)
+        dataFragment.adapter.notifyItemInserted(data.size)
     }
 
     fun resetTempData() {
